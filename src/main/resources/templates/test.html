@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- xmlns:th 引入 thymeleaf(缩写为 th) 命名空间，模板文件中的动态属性可以用 th:xxx 指定 -->
+
+<head>
+    <title>Spring Boot + Thymeleaf demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!-- @{path} 引用 /static 下的静态资源文件 -->
+</head>
+
+<body>
+
+<h1>Spring Boot + Thymeleaf demo</h1>
+<h2 th:text="'name: ' + ${name}"></h2>
+<!-- ${xxx} 引用 SpringMVC 中 model 属性 -->
+
+</body>
+
+</html>
