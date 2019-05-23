@@ -1,10 +1,10 @@
 package top.imlgw.spike.controller;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import top.imlgw.spike.entity.SpikeUser;
@@ -12,9 +12,8 @@ import top.imlgw.spike.result.CodeMsg;
 import top.imlgw.spike.result.Result;
 import top.imlgw.spike.service.SpikeUserService;
 import top.imlgw.spike.utils.MD5Util;
-import top.imlgw.spike.utils.ValidatorUtil;
 import top.imlgw.spike.vo.LoginVo;
-
+import javax.servlet.http.HttpServletResponse;
 
 
 /**
@@ -37,10 +36,10 @@ public class LoginController {
 
     @RequestMapping("/do_login")
     @ResponseBody
-    public Result<CodeMsg> doLogin(LoginVo vo){
+    public Result<Boolean> doLogin(HttpServletResponse response, @Validated LoginVo vo){
         logger.info(vo.toString());
-        //表单校验
-        String mobile = vo.getMobile();
+        //表单校验 ---采用JSR校验
+        /*String mobile = vo.getMobile();
         String password = vo.getPassword();
         if(StringUtils.isEmpty(mobile)){
             return Result.error(CodeMsg.MOBILE_EMPTY);
@@ -56,7 +55,11 @@ public class LoginController {
         if(codeMsg.getCode()==0){
             return Result.success(codeMsg);
         }
-        return Result.error(codeMsg);
+        return Result.error(codeMsg);*/
+
+        //改进，采用异常来处理，代码更加简洁
+        spikeUserService.login(response,vo);
+        return Result.success(true);
     }
 
     public CodeMsg login(LoginVo vo){
@@ -78,5 +81,5 @@ public class LoginController {
             return CodeMsg.SUCCESS;
         }
         return CodeMsg.PASSWORD_ERROR;
-    }
+    } //放到业务层
 }

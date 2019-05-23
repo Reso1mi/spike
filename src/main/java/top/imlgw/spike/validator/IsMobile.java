@@ -17,7 +17,7 @@ import java.lang.annotation.*;
 public @interface IsMobile {
     boolean required() default true;
 
-    String message() default "号码格式有问题";
+    String message() default "号码格式错误";
 
     Class<?>[] groups() default {};
 

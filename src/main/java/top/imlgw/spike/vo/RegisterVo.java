@@ -2,7 +2,9 @@ package top.imlgw.spike.vo;
 
 
 import org.hibernate.validator.constraints.Length;
+import top.imlgw.spike.validator.IsMobile;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -10,16 +12,18 @@ import javax.validation.constraints.NotNull;
  * @date 2019/5/13 13:16
  */
 public class RegisterVo {
-    @NotNull
+    @NotNull(message = "手机号不能为空")
+    @IsMobile
     private String mobile;
 
-    @NotNull
-    @Length(min=32)
+    @NotNull(message = "密码不能为空")
+    @Length(min=6,message = "密码设置过短")
     private String password;
 
+    @NotBlank(message = "昵称不能为空")
     private String nickname;
 
-    public RegisterVo(@NotNull String mobile, @NotNull @Length(min = 32) String password, String nickname) {
+    public RegisterVo(@NotNull String mobile, @NotNull @Length(min = 6) String password, String nickname) {
         this.mobile = mobile;
         this.password = password;
         this.nickname = nickname;

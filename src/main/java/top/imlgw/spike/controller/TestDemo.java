@@ -3,13 +3,18 @@ package top.imlgw.spike.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import top.imlgw.spike.dao.UserMapper;
 import top.imlgw.spike.entity.User;
 import top.imlgw.spike.redis.RedisService;
-import top.imlgw.spike.redis.UserKey;
 import top.imlgw.spike.result.Result;
+import top.imlgw.spike.vo.LoginVo;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 
 
 /**
@@ -17,6 +22,7 @@ import top.imlgw.spike.result.Result;
  * @date 2019/5/11 14:18
  */
 @Controller
+@Validated
 public class TestDemo {
 
     @Autowired
@@ -51,6 +57,7 @@ public class TestDemo {
         return null;
     }
 
+
 /*    @RequestMapping("/redis/set")
     @ResponseBody
     public Result<Boolean> redisSet(){
@@ -69,5 +76,21 @@ public class TestDemo {
         User user = redisService.get(UserKey.userId ,"lgw", User.class);
         return Result.success(user);
     }*/
+
+    @RequestMapping("/jsr303")
+    @ResponseBody
+    public void testJSR(@Validated User user, BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            System.out.print(bindingResult.getTarget()+bindingResult.getFieldError().getDefaultMessage());
+            return;
+        }
+    }
+
+    @RequestMapping("/jsr303-2")
+    @ResponseBody
+    public void testJSR(@Validated({LoginVo.Test2.class}) LoginVo vo){
+
+
+    }
 
 }

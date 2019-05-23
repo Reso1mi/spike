@@ -5,7 +5,6 @@ import top.imlgw.spike.utils.ValidatorUtil;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.lang.annotation.Annotation;
 
 /**
  * @author imlgw.top

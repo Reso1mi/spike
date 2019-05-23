@@ -1,13 +1,20 @@
 package top.imlgw.spike.entity;
 
+import org.hibernate.validator.constraints.Length;
+import javax.validation.constraints.NotNull;
+
 /**
  * @author imlgw.top
  * @date 2019/5/11 15:56
  */
 public class User {
+    @NotNull(message = "id不能为空")
     private Integer id;
+    @NotNull(message = "名字不能为空")
     private String name;
+
     private Integer age;
+    @Length(min = 6,message = "密码长度至少6位")
     private String password;
 
     @Override

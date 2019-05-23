@@ -82,4 +82,18 @@ public class SpikeUser {
     public void setLoginCount(Integer loginCount) {
         this.loginCount = loginCount;
     }
+
+    @Override
+    public String toString() {
+        return "SpikeUser{" +
+                "id=" + id +
+                ", nickname='" + nickname + '\'' +
+                ", password='" + password + '\'' +
+                ", salt='" + salt + '\'' +
+                ", head='" + head + '\'' +
+                ", registerDate=" + registerDate +
+                ", lastLoginDate=" + lastLoginDate +
+                ", loginCount=" + loginCount +
+                '}';
+    }
 }

@@ -20,46 +20,62 @@
     <script type="text/javascript" th:src="@{/js/common.js}"></script>
 
 </head>
+<style>
+    .container {
+        height: 200px;
+        width: 1280px !important;
+        max-width: none !important;
+    }
+    .row {
+        margin-bottom: 15px;
+    }
+    .login {
+        position: absolute;
+        top: 100px;
+        left: 350px;
+    }
+    .all {
+        margin-top: 1px;
+        margin-left: 100px;
+    }
+    body {
+        font-size: 18px;
+        background-image: url("http://imlgw.top/medias/featureimages/16.jpg");
+        background-repeat: no-repeat;
+        background-size: 100%;
+    }
+</style>
 <body>
-
-<form name="loginForm" id="loginForm" method="post" style="width:50%; margin:0 auto">
-
-    <h2 style="text-align:center; margin-bottom: 20px">用户登录</h2>
-
-    <div class="form-group">
-        <div class="row">
-            <label class="form-label col-md-4">请输入手机号码</label>
-            <div class="col-md-5">
-                <input id="mobile" name="mobile" class="form-control" type="text" placeholder="手机号码" required="true"
-                       minlength="11" maxlength="11"/>
-            </div>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="row">
-            <label class="form-label col-md-4">请输入密码</label>
-            <div class="col-md-5">
-                <input id="password" name="password" class="form-control" type="password" placeholder="密码"
-                       required="true" minlength="6" maxlength="16"/>
-            </div>
-        </div>
-    </div>
-
-    <div class="row col-sm-6 col-md-offset-3">
-        <div class="col-md-3">
-            <button class="btn btn-default btn-block" type="reset" onclick="reset()">重置</button>
-        </div>
-        <div class="col-md-3">
-            <button class="btn btn-primary btn-block" onclick="login()">登录</button>
-        </div>
-    </div>
-</form>
-<div class="col-md-3">
-    <a href="/register/to_register">
-        <button class="btn btn-danger btn-block">注册</button>
-    </a>
+<div class="container">
 </div>
+<div class="container">
+    <div class="all col-xs-12">
+        <div class="login col-md-3">
+            <form  name="loginForm" id="loginForm" method="post"
+                  enctype="application/x-www-form-urlencoded">
+                <div class="form-group">
+                    <label for="">手机号码:</label> <input type="text" class="form-control"
+                                                       id="mobile" name="mobile" placeholder="手机号码" required="true"
+                                                      minlength="11" maxlength="11">
+                </div>
+                <div class="form-group" id="">
+                    <label for="">密码:</label> <input type="password" id="password" name="password"
+                                                     class="form-control" placeholder="密码"
+                                                     required="true" minlength="6" maxlength="26">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-danger" onclick="login()">OK</button>
+                    <button type="reset" class="btn">Cancel</button>
+                </div>
+                <a href="/register/to_register">
+                    没有账号？去注册
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 </body>
 <script>
     function login() {
@@ -96,7 +112,7 @@
                 console.log(data);
                 if (data.code == 0) {
                     layer.msg("成功");
-                    //window.location.href="/goods/to_list";
+                    window.location.href="/goods/to_list";
                 } else {
                     layer.msg(data.msg);
                 }

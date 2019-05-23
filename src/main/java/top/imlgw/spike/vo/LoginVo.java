@@ -1,6 +1,7 @@
 package top.imlgw.spike.vo;
 
 import org.hibernate.validator.constraints.Length;
+import top.imlgw.spike.validator.IsMobile;
 
 import javax.validation.constraints.NotNull;
 
@@ -10,11 +11,12 @@ import javax.validation.constraints.NotNull;
  */
 public class LoginVo {
 
-    @NotNull
+    @NotNull(message = "手机号不能为空")
+    @IsMobile(groups = Test1.class)
     private String mobile;
 
-    @NotNull
-    @Length(min=32)
+    @NotNull(message = "密码不能为空")
+    @Length(min=6 ,groups = Test2.class,message = "密码长度过短")
     private String password;
 
     public String getMobile() {
@@ -33,4 +35,8 @@ public class LoginVo {
     public String toString() {
         return "LoginVo [mobile=" + mobile + ", password=" + password + "]";
     }
+
+    public interface Test1{}
+
+    public interface Test2{}
 }
