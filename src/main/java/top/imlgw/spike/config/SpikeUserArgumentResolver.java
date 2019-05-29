@@ -31,7 +31,9 @@ public class SpikeUserArgumentResolver implements HandlerMethodArgumentResolver 
         return clazz==SpikeUser.class;
     }
 
-
+    /*
+    * 处理SpikeUser参数
+    * */
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
                                   NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
         HttpServletRequest request = webRequest.getNativeRequest(HttpServletRequest.class);
@@ -48,10 +50,16 @@ public class SpikeUserArgumentResolver implements HandlerMethodArgumentResolver 
         return userService.getUserByToken(response,token);
     }
 
-    private String getCookieValue(HttpServletRequest request, String cookiName) {
+    /*
+    * 获取User的cookie的值
+    * */
+    private String getCookieValue(HttpServletRequest request, String cookieName) {
         Cookie[]  cookies = request.getCookies();
+        if(cookies == null || cookies.length <= 0){
+            return null;
+        }
         for(Cookie cookie : cookies) {
-            if(cookie.getName().equals(cookiName)) {
+            if(cookie.getName().equals(cookieName)) {
                 return cookie.getValue();
             }
         }

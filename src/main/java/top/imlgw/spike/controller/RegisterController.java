@@ -43,6 +43,7 @@ public class RegisterController {
         return  Result.success(CodeMsg.SUCCESS);
     }
 
+    @Deprecated
     public boolean register(RegisterVo vo){
         //构建这个用户
         SpikeUser user = new SpikeUser();

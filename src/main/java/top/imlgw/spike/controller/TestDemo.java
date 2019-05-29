@@ -7,7 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import top.imlgw.spike.dao.UserMapper;
+import top.imlgw.spike.dao.UserDao;
 import top.imlgw.spike.entity.User;
 import top.imlgw.spike.redis.RedisService;
 import top.imlgw.spike.result.Result;
@@ -26,7 +26,7 @@ import javax.validation.constraints.NotEmpty;
 public class TestDemo {
 
     @Autowired
-    private UserMapper userMapper;
+    private UserDao userDao;
 
     @Autowired
     private RedisService redisService;

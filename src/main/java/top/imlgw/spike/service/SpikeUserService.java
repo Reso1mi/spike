@@ -35,7 +35,6 @@ public class SpikeUserService {
 
     /**
      * Dao相关
-     *
      * @param id
      * @return
      */
@@ -49,7 +48,6 @@ public class SpikeUserService {
 
     /*
     * Session相关
-    *
     * */
     public SpikeUser getUserByToken(HttpServletResponse response, String token) {
         if(StringUtils.isEmpty(token)) {
@@ -66,7 +64,6 @@ public class SpikeUserService {
 
     /**
      * 登陆逻辑
-     *
      * @param vo
      * @return
      */
@@ -88,6 +85,7 @@ public class SpikeUserService {
         if (!formPass.equals(dbPass)) {
             throw new GlobalException(CodeMsg.PASSWORD_ERROR);
         }
+        //生成随机token
         String token =UUIDUtil.getUuid();
         addCookie(response,token,user);
         return true;
@@ -103,7 +101,6 @@ public class SpikeUserService {
 
     /**
      * 注册逻辑
-     *
      * @param vo
      * @return
      */

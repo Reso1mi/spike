@@ -24,7 +24,10 @@ public class CodeMsg {
     public static final CodeMsg PASSWORD_ERROR= new CodeMsg(500215, "密码错误");
     public static final CodeMsg NICKNAME_EMPTY = new CodeMsg(500216, "昵称不能为空");
     public static final CodeMsg ID_REPEAT  = new CodeMsg(500217, "该号码已经注册");
-
+    //秒杀异常
+    public static final CodeMsg STOCK_EMPTY=new CodeMsg(500310,"库存不足！！！");
+    public static final CodeMsg SKIPE_REPEAT=new CodeMsg(500311,"已经秒杀过该商品！！");
+    public static final CodeMsg LOGIN_NONE=new CodeMsg(500312,"尚未登陆！！！");
 
 
     private CodeMsg(int code, String msg) {

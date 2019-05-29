@@ -13,7 +13,8 @@ import top.imlgw.spike.entity.User;
  */
 @Mapper
 @Component
-public interface UserMapper {
+public interface UserDao {
+
     @Select("SELECT * FROM USER WHERE NAME = #{name}")
     User findByName(@Param("name") String name);
 
