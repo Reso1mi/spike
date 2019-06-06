@@ -40,7 +40,7 @@ public class RegisterController {
         logger.info(vo.toString());
         //注册
         spikeUserService.register(vo);
-        return  Result.success(CodeMsg.SUCCESS);
+        return  Result.success(CodeMsg.REGISTER_SUCCESS);
     }
 
     @Deprecated

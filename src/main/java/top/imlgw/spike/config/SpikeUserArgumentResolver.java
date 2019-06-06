@@ -39,9 +39,9 @@ public class SpikeUserArgumentResolver implements HandlerMethodArgumentResolver 
         HttpServletRequest request = webRequest.getNativeRequest(HttpServletRequest.class);
         HttpServletResponse response = webRequest.getNativeResponse(HttpServletResponse.class);
         //拿参数中的token
-        String paramToken = request.getParameter(SpikeUserService.COOK1_NAME_TOKEN);
+        String paramToken = request.getParameter(SpikeUserService.COOK_NAME_TOKEN);
         //拿cookie中的token
-        String cookieToken = getCookieValue(request, SpikeUserService.COOK1_NAME_TOKEN);
+        String cookieToken = getCookieValue(request, SpikeUserService.COOK_NAME_TOKEN);
         if(StringUtils.isEmpty(cookieToken) && StringUtils.isEmpty(paramToken)) {
             //没登陆cookie为空
             return null;

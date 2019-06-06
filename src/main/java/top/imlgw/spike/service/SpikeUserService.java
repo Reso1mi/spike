@@ -25,7 +25,7 @@ import java.util.Date;
 @Service
 public class SpikeUserService {
 
-    public static final String COOK1_NAME_TOKEN="token";
+    public static final String COOK_NAME_TOKEN="token";
 
     @Autowired
     private SpikeUserDao spikeUserDao;
@@ -67,7 +67,7 @@ public class SpikeUserService {
      * @param vo
      * @return
      */
-    public boolean login(HttpServletResponse response, LoginVo vo) {
+    public void login(HttpServletResponse response, LoginVo vo) {
         if (vo == null) {
             throw new GlobalException(CodeMsg.SERVER_ERROR);
         }
@@ -88,12 +88,11 @@ public class SpikeUserService {
         //生成随机token
         String token =UUIDUtil.getUuid();
         addCookie(response,token,user);
-        return true;
     }
 
     private void addCookie(HttpServletResponse response,String token,SpikeUser user){
         redisService.set(SpikeUserKey.tkPrefix, token, user);
-        Cookie cookie = new Cookie(COOK1_NAME_TOKEN, token);
+        Cookie cookie = new Cookie(COOK_NAME_TOKEN, token);
         cookie.setMaxAge(SpikeUserKey.tkPrefix.expireSecond());
         cookie.setPath("/");
         response.addCookie(cookie);

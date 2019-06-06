@@ -28,7 +28,7 @@ public class SpikeController {
     private GoodsService goodsService;
 
     @RequestMapping("/do_spike")
-    public String tolist(Model model, SpikeUser spikeUser, @RequestParam("goodsId") long goodsId) {
+    public String do_spike(Model model, SpikeUser spikeUser, @RequestParam("goodsId") long goodsId) {
         if (spikeUser==null) { //没有登录
             return "login";
         }

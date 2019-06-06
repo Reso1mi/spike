@@ -32,9 +32,6 @@ public class GoodsController {
 
     @RequestMapping("/to_list")
     public String tolist(Model model,SpikeUser spikeUser) {
-        /*if (spikeUser==null) {
-            return "login";
-        }*/
         List<GoodsVo> goodsVos = goodsService.goodsVoList();
         model.addAttribute("user", spikeUser);
         model.addAttribute("goodsList",goodsVos);
@@ -50,8 +47,8 @@ public class GoodsController {
     @SuppressWarnings("all")
     @RequestMapping("/to_list0")
     public String tolist0(HttpServletResponse response, Model model,
-                         @CookieValue(value = SpikeUserService.COOK1_NAME_TOKEN, required = false) String cookie,
-                         @RequestParam(value = SpikeUserService.COOK1_NAME_TOKEN, required = false) String param) {
+                         @CookieValue(value = SpikeUserService.COOK_NAME_TOKEN, required = false) String cookie,
+                         @RequestParam(value = SpikeUserService.COOK_NAME_TOKEN, required = false) String param) {
                             //手机浏览器，有可能将cookie放在参数中
         System.out.println("cookie:" +cookie);
         System.out.println("param " +param);
@@ -97,6 +94,7 @@ public class GoodsController {
         model.addAttribute("spikeStatus",spikeStatus);
         return "goods_detail";
     }
+
 
 }
 

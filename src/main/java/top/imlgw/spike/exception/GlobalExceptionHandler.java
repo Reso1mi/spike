@@ -21,7 +21,7 @@ import java.util.List;
 @ResponseBody //直接返回给客户端，需要json的转换
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(value = GlobalException.class) //处理controller层所有异常
+    @ExceptionHandler(value = GlobalException.class) //处理GlobalException异常
     public Result<String> globalExceptionHandle(HttpServletRequest request, Exception e) {
         e.printStackTrace();
         if (e instanceof GlobalException) {

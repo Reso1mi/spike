@@ -8,6 +8,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import top.imlgw.spike.dao.UserDao;
+import top.imlgw.spike.entity.SpikeUser;
 import top.imlgw.spike.entity.User;
 import top.imlgw.spike.redis.RedisService;
 import top.imlgw.spike.result.Result;
@@ -22,7 +23,6 @@ import javax.validation.constraints.NotEmpty;
  * @date 2019/5/11 14:18
  */
 @Controller
-@Validated
 public class TestDemo {
 
     @Autowired
@@ -47,13 +47,12 @@ public class TestDemo {
     }*/
 
     /*
-    *Redis 测试
+    *Redis 压测
     * */
     @RequestMapping("/redis/get")
     @ResponseBody
-    public Result<Long> redisGet(){
-        /*Long res= redisService.get("www.imlgw.top", Long.class);
-        return Result.success(res);*/
+    public Result<Long> redisGet(SpikeUser spikeUser){
+        //System.out.println(spikeUser);
         return null;
     }
 

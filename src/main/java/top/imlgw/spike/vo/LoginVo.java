@@ -36,6 +36,11 @@ public class LoginVo {
         return "LoginVo [mobile=" + mobile + ", password=" + password + "]";
     }
 
+    public LoginVo(@NotNull(message = "手机号不能为空") @IsMobile(groups = Test1.class) String mobile, @NotNull(message = "密码不能为空") @Length(min = 6, groups = Test2.class, message = "密码长度过短") String password) {
+        this.mobile = mobile;
+        this.password = password;
+    }
+
     public interface Test1{}
 
     public interface Test2{}
