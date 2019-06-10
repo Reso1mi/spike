@@ -6,6 +6,7 @@ package top.imlgw.spike.redis;
  */
 public abstract class BasePrefix implements KeyPrefix{
 
+    //s为单位
     private int expireSeconds;
 
     private String prefix;

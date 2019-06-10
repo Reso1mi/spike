@@ -19,6 +19,19 @@ public class OrderService {
     @Autowired
     private OrderDao orderDao;
 
+    /**
+     * @param orderId
+     * @return 获取order信息
+     */
+    public OrderInfo getOrderInfoById(long orderId){
+        return  orderDao.getOrderById(orderId);
+    }
+
+    /**
+     * @param spikeUserId
+     * @param goodsId
+     * @return 判断是否重复秒杀
+     */
     public SpikeOrder getOrderByUserIdAndGoodsId(long spikeUserId, long goodsId){
         return orderDao.getOrderByUserIdAndGoodsId(spikeUserId,goodsId);
     }

@@ -48,6 +48,7 @@ public class TestDemo {
 
     /*
     *Redis 压测
+    * 5000*10 QPS 3000左右
     * */
     @RequestMapping("/redis/get")
     @ResponseBody

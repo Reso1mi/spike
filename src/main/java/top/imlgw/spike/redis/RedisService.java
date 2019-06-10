@@ -37,7 +37,12 @@ public class RedisService {
         try {
             jedis = jedisPool.getResource();
             String realKey=prefix.getPrefix()+key;
-            String res = jedis.set(realKey, beanToString(value));
+            int second = prefix.expireSecond();
+            if(second<=0){
+                jedis.set(realKey, beanToString(value));
+            }else {
+                jedis.setex(realKey,second,beanToString(value));
+            }
             return true;
         } finally {
             if (jedis != null) {

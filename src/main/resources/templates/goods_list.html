@@ -86,7 +86,7 @@
 <div class="search w1">
     <div class="row w1">
         <div class="col-md-3" th:each="goods,goodsStat : ${goodsList}">
-            <a th:href="'/goods/to_detail/'+${goods.id}">
+            <a th:href="'/goods_static_detail.html?goodsId='+${goods.id}">
                 <img th:src="@{${goods.goodsImg}}" width="100" height="200"/>
             </a>
             <h4 th:text="${goods.goodsName}"></h4>
@@ -94,7 +94,7 @@
                 <li th:text="|库存:${goods.goodsName}|"></li>
                 <li th:text="|原价:${goods.goodsPrice}|"></li>
                 <li th:text="|秒杀价:${goods.spikePrice}|"></li>
-                <li><a th:href="'/goods/to_detail/'+${goods.id}">详情</a></li>
+                <li><a th:href="'/goods_static_detail.html?goodsId='+${goods.id}">详情</a></li>
             </ul>
         </div>
     </div>

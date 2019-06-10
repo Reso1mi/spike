@@ -13,6 +13,8 @@ import top.imlgw.spike.entity.SpikeOrder;
 @Component
 public interface OrderDao {
 
+    @Select("select * from order_info where id=#{orderId}")
+    OrderInfo getOrderById(@Param("orderId") long orderId);
 
     /**
      * @param spikeUserId

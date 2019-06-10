@@ -27,15 +27,30 @@ public class Result<T> {
         this.msg=codeMsg.getMsg();
     }
 
+
+    /**
+     * @param codeMsg
+     * @param <T>
+     * @return 定义好的CodeMsg类型
+     */
     public static <T> Result<T> success(CodeMsg codeMsg){
         return  new Result<T>(codeMsg);
     }
 
+    /**
+     * @param data 返回给前端的数据
+     * @param <T>  msg==success
+     * @return     code=0
+     */
     public static <T> Result<T> success(T data){
         return  new Result<T>(data);
     }
 
-
+    /**
+     * @param codeMsg
+     * @param <T>
+     * @return 定义好的error CodeMsg类型
+     */
     public static <T> Result<T> error(CodeMsg codeMsg){
         return  new Result<T>(codeMsg);
     }

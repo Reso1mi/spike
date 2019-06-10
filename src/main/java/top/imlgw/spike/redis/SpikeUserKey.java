@@ -7,7 +7,7 @@ package top.imlgw.spike.redis;
 public class SpikeUserKey extends BasePrefix {
 
     //token有效期（ms）
-    private static final int TOKEN_EXPIRE =3600*24*2;
+    private static final int TOKEN_EXPIRE =-1;
 
     public SpikeUserKey(String prefix) {
         super(prefix);

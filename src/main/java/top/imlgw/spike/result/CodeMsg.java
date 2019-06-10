@@ -26,9 +26,10 @@ public class CodeMsg {
     public static final CodeMsg ID_REPEAT  = new CodeMsg(500217, "该号码已经注册");
     //秒杀异常
     public static final CodeMsg STOCK_EMPTY=new CodeMsg(500310,"库存不足！！！");
-    public static final CodeMsg SKIPE_REPEAT=new CodeMsg(500311,"已经秒杀过该商品！！");
+    public static final CodeMsg SPIKE_REPEAT=new CodeMsg(500311,"已经秒杀过该商品！！");
     public static final CodeMsg LOGIN_NONE=new CodeMsg(500312,"尚未登陆！！！");
-
+    //订单异常
+    public static final CodeMsg ORDRER_NOT_EXIST=new CodeMsg(500400,"订单不存在！！！");
 
     private CodeMsg(int code, String msg) {
         this.code = code;

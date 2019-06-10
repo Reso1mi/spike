@@ -40,6 +40,7 @@ public class TokenUtils {
         FileOutputStream outputStream=new FileOutputStream(new File("D:\\AliyunKey\\config.txt"));
         for (int i=0;i<20000;i++){
             String phone = creatPhone();
+            //这里是一个失误，应该加密后再存的。。。导致我不知道这些账号的密码
             RegisterVo registerVo = new RegisterVo(phone,"123456","user-"+i);
             spikeUserService.register(registerVo);
             //需要将token返回出来

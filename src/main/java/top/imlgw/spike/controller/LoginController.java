@@ -37,30 +37,13 @@ public class LoginController {
     @RequestMapping("/do_login")
     @ResponseBody
     public Result<Boolean> doLogin(HttpServletResponse response, @Validated LoginVo vo){
-        logger.info(vo.toString());
         //表单校验 ---采用JSR校验
-        /*String mobile = vo.getMobile();
-        String password = vo.getPassword();
-        if(StringUtils.isEmpty(mobile)){
-            return Result.error(CodeMsg.MOBILE_EMPTY);
-        }
-        if(StringUtils.isEmpty(password)){
-            return Result.error(CodeMsg.PASSWORD_EMPTY);
-        }
-        if(!ValidatorUtil.isMobile(mobile)){
-            return Result.error(CodeMsg.MOBILE_ERROR);
-        }
-        //登陆
-        CodeMsg codeMsg=login(vo);
-        if(codeMsg.getCode()==0){
-            return Result.success(codeMsg);
-        }
-        return Result.error(codeMsg);*/
-
+        logger.info(vo.toString());
         //改进，采用异常来处理，代码更加简洁
         spikeUserService.login(response,vo);
         return Result.success(true);
     }
+
 
     public CodeMsg login(LoginVo vo){
         if(vo==null){
