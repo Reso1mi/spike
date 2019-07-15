@@ -4,19 +4,19 @@
     <title>登录</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <!-- jquery -->
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
     <!-- bootstrap -->
-    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css" />
-    <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
     <!-- jquery-validator -->
-    <script type="text/javascript" src="/jquery-validation/jquery.validate.min.js"></script>
-    <script type="text/javascript" src="/jquery-validation/localization/messages_zh.min.js"></script>
+    <script type="text/javascript" src="jquery-validation/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="jquery-validation/localization/messages_zh.min.js"></script>
     <!-- layer -->
-    <script type="text/javascript" src="/layer/layer.js"></script>
+    <script type="text/javascript" src="layer/layer.js"></script>
     <!-- md5.js -->
-    <script type="text/javascript" src="/js/md5.min.js"></script>
+    <script type="text/javascript" src="js/md5.min.js"></script>
     <!-- common.js -->
-    <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
 
 </head>
 <style>
@@ -66,7 +66,7 @@
                     <button type="submit" class="btn btn-danger" onclick="login()">OK</button>
                     <button type="reset" class="btn">Cancel</button>
                 </div>
-                <a href="/register/to_register">
+                <a href="/register">
                     没有账号？去注册
                 </a>
             </form>
@@ -93,7 +93,7 @@
         //拿到表单的明文密码
         var inputPass = $("#password").val();
         //盐
-        var salt = g_passsword_salt;
+        var salt = g_password_salt;
         //拼接
         var str = "" + salt.charAt(0) + salt.charAt(2) + inputPass + salt.charAt(5) + salt.charAt(4);
         //得到md5+盐的密码
@@ -102,16 +102,17 @@
         $.ajax({
             url: "/login/do_login",
             type: "POST",
-            data: {
+            contentType: "application/json",
+            data: JSON.stringify({
                 mobile: $("#mobile").val(),
                 password: password
-            },
+            }),
             success: function (data) {
                 layer.closeAll();
                 console.log(data);
                 if (data.code == 0) {
                     layer.msg("成功");
-                    window.location.href="/goods/to_list";
+                    window.location.href="/goodslist";
                 } else {
                     layer.msg(data.msg);
                 }

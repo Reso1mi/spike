@@ -37,6 +37,7 @@ public class TestDemo {
     @RequestMapping("/demo")
     public String test(ModelMap model){
         model.addAttribute("name","imlgw.top");
+        System.out.println("dsdsad");
         return  "test";
     }
 

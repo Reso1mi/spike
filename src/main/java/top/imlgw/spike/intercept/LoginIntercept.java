@@ -47,7 +47,7 @@ public class LoginIntercept implements HandlerInterceptor {
         }
         //有注解，没登陆
         if(spikeUser==null){
-            response.sendRedirect("/no_login");
+            response.sendRedirect("/");
             return false;
         }
         return true;

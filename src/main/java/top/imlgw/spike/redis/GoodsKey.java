@@ -17,7 +17,7 @@ public class GoodsKey extends BasePrefix{
         super(expireSeconds, prefix);
     }
 
-    public static GoodsKey glsPrefix=new GoodsKey(GOODS_EXPIRE,"gsl");
+    public static GoodsKey glsPrefix=new GoodsKey(GOODS_EXPIRE,"gls");
 
     public static GoodsKey gdsPrefix=new GoodsKey(GOODS_EXPIRE,"gds");
 }

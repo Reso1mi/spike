@@ -1,0 +1,149 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>商品详情</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!-- jquery -->
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <!-- bootstrap -->
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css"/>
+    <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
+    <!-- jquery-validator -->
+    <script type="text/javascript" src="/jquery-validation/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="/jquery-validation/localization/messages_zh.min.js"></script>
+    <!-- layer -->
+    <script type="text/javascript" src="/layer/layer.js"></script>
+    <!-- md5.js -->
+    <script type="text/javascript" src="/js/md5.min.js"></script>
+    <!-- common.js -->
+    <script type="text/javascript" src="/js/common.js"></script>
+    <!--art-template-->
+    <script type="text/javascript" src="/js/art-template.js"></script>
+</head>
+<body>
+
+<div class="panel panel-default">
+    <div class="panel-heading">秒杀商品详情</div>
+    <div id="content"></div>
+    <script id="goods_detail" type="text/html">
+        <div class="panel-body">
+            {{if user}}
+            <span> {{user.nickname}}<br/></span>
+            <span>没有收货地址</span>
+            {{else}}
+            <span>还没有登陆，请先登录！！！<br/></span>
+            {{/if}}
+        </div>
+        <table class="table">
+            <tr>
+                <td>商品名称</td>
+                <td colspan="3" id="goodsName">{{goods.goodsName}}</td>
+            </tr>
+            <tr>
+                <td>商品图片</td>
+                <td colspan="3"><img id="goodsImg" src="{{goods.goodsImg}}" width="200" height="200"/></td>
+            </tr>
+            <tr>
+                <td>秒杀开始时间</td>
+                <td id="startTime">{{goods.startDate}}</td>
+                <td>
+                    <input type="hidden" id="remainSeconds" value="{{remainSeconds}}"/>
+                    <span id="spikeTip"></span>
+                </td>
+                <td>
+                    <button class="btn btn-primary btn-block" type="button" id="buyButton" onclick="doSpike()">立即秒杀
+                    </button>
+                    <input type="hidden" name="goodsId" value="{{goods.id}}" id="goodsId"/>
+                </td>
+            </tr>
+            <tr>
+                <td>商品原价</td>
+                <td colspan="3" id="goodsPrice">{{goods.goodsPrice}}</td>
+            </tr>
+            <tr>
+                <td>秒杀价</td>
+                <td colspan="3" id="miaoshaPrice">{{goods.spikePrice}}</td>
+            </tr>
+            <tr>
+                <td>库存数量</td>
+                <td colspan="3" id="stockCount">{{goods.stockCount}}</td>
+            </tr>
+        </table>
+    </script>
+</div>
+</body>
+<script>
+
+    function doSpike() {
+        $.ajax({
+            url: "/spike/do_spike",
+            type: "POST",
+            data: {
+                goodsId: $("#goodsId").val(),
+            },
+            success: function (res) {
+                if (res.code == 0) {
+                    window.location.href = "/order_detail.html?orderId=" + res.data.id;
+                } else {
+                    layer.msg(res.msg);
+                }
+            },
+            error: function () {
+                layer.msg("秒杀客户端请求有误");
+            }
+        });
+
+    }
+
+
+    $(function () {
+        //countDown();
+        getDetail();
+    });
+
+    function getDetail() {
+        var goodsId = g_getQueryString("goodsId");
+        $.ajax({
+            url: "/goods/detail/" + goodsId,
+            type: "GET",
+            success: function (res) {
+                if (res.code == 0) {
+                    res.data.goods.startDate = new Date(res.data.goods.startDate).format("yyyy-MM-dd hh:mm:ss");
+                    var html = template('goods_detail', res.data);
+                    document.getElementById('content').innerHTML = html;
+                    countDown();
+                } else {
+                    layer.msg(res.msg);
+                    window.location.href = "/spike_fail.html";
+                }
+            },
+            error: function () {
+                layer.msg("客户端请求有误");
+            }
+        });
+    }
+
+    function countDown() {
+        var remainSeconds = $("#remainSeconds").val();
+        var timeout;
+        if (remainSeconds > 0) {//秒杀还没开始，倒计时
+            $("#buyButton").attr("disabled", true);
+            $("#spikeTip").html("秒杀倒计时：" + remainSeconds + "秒");
+            timeout = setTimeout(function () {
+                $("#remainSeconds").val(remainSeconds - 1);
+                countDown();
+            }, 1000);
+        } else if (remainSeconds == 0) {//秒杀进行中
+            $("#buyButton").attr("disabled", false);
+            if (timeout) {
+                clearTimeout(timeout);
+            }
+            $("#spikeTip").html("秒杀进行中");
+        } else {//秒杀已经结束
+            $("#buyButton").attr("disabled", true);
+            $("#spikeTip").html("秒杀已经结束");
+        }
+    }
+
+</script>
+</html>

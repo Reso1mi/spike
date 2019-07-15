@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>商品列表</title>
+    <link rel="stylesheet" href="/css/base.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!-- jquery -->
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <!-- bootstrap -->
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css"/>
+    <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
+    <!-- jquery-validator -->
+    <script type="text/javascript" src="/jquery-validation/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="/jquery-validation/localization/messages_zh.min.js"></script>
+    <!-- layer -->
+    <script type="text/javascript" src="/layer/layer.js"></script>
+    <!-- md5.js -->
+    <script type="text/javascript" src="/js/md5.min.js"></script>
+    <!-- common.js -->
+    <script type="text/javascript" src="/js/common.js"></script>
+    <!--art-template>-->
+    <script type="text/javascript" src="/js/art-template.js"></script>
+</head>
+
+<body class="con">
+
+<div class="header w1">
+    <ul>
+        <li class="h1"><a href="goods_list.html">秒杀</a></li>
+        <li><a href="#">二手</a></li>
+        <li><a href="#">闪购</a></li>
+        <li><a href="#">生鲜</a></li>
+        <li><a href="#">美妆馆</a></li>
+        <li><a href="#">服饰</a></li>
+        <li><a href="#">全部商品分类</a></li>
+    </ul>
+</div>
+<div class="panel w1">
+</div>
+<div class="search w1">
+    <div id="content"></div>
+    <script id="goods_detail" type="text/html">
+        <div class="row w1">
+            {{each data}}
+            <div class="col-md-3">
+                <a href="/goods_detail.html?goodsId={{$value.id}}">
+                    <img src="{{$value.goodsImg}}" width="100" height="200"/>
+                </a>
+                <h4>{{$value.goodsName}}</h4>
+                <ul>
+                    <li>{{$value.stockCount}}</li>
+                    <li>{{$value.goodsPrice}}</li>
+                    <li>{{$value.spikePrice}}</li>
+                    <li><a href="/goods_detail.html?goodsId={{$value.id}}">详情</a></li>
+                </ul>
+            </div>
+            {{/each}}
+        </div>
+    </script>
+
+</div>
+</body>
+
+<script>
+    $(function () {
+        getGoodsList();
+    })
+
+    function getGoodsList() {
+        $.ajax({
+            url: "/goods/get_list",
+            type: "GET",
+            success: function (res) {
+                if (res.code == 0) {
+                    var html = template('goods_detail', res);
+                    document.getElementById('content').innerHTML = html;
+                } else {
+                    layer.msg(res.msg);
+                }
+            },
+            error: function () {
+                layer.msg("订单客户端请求有误");
+            }
+        });
+    };
+</script>
+
+</html>

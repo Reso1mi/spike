@@ -34,7 +34,7 @@ public class Result<T> {
      * @return 定义好的CodeMsg类型
      */
     public static <T> Result<T> success(CodeMsg codeMsg){
-        return  new Result<T>(codeMsg);
+        return  new Result<>(codeMsg);
     }
 
     /**
@@ -43,7 +43,7 @@ public class Result<T> {
      * @return     code=0
      */
     public static <T> Result<T> success(T data){
-        return  new Result<T>(data);
+        return  new Result<>(data);
     }
 
     /**
@@ -52,7 +52,7 @@ public class Result<T> {
      * @return 定义好的error CodeMsg类型
      */
     public static <T> Result<T> error(CodeMsg codeMsg){
-        return  new Result<T>(codeMsg);
+        return  new Result<>(codeMsg);
     }
 
 

@@ -38,9 +38,9 @@ public class SpikeController {
      * @param goodsId
      * @return 秒杀接口
      */
-    @RequestMapping("/do_spike")
+    @RequestMapping("/do_spike0")
     @NeedLogin
-    public String do_spike(Model model, SpikeUser spikeUser, @RequestParam("goodsId") long goodsId) {
+    public String do_spike0(Model model, SpikeUser spikeUser, @RequestParam("goodsId") long goodsId) {
         if (spikeUser==null) { //没有登录
             return "login";
         }
@@ -69,13 +69,14 @@ public class SpikeController {
      * @param goodsId
      * @return
      */
-    @RequestMapping("/spike")
+    @RequestMapping("/do_spike")
     @ResponseBody
     @NeedLogin
-    public Result<OrderInfo> do_spike1(SpikeUser spikeUser, @RequestParam("goodsId") long goodsId) {
-        if (spikeUser==null) { //没有登录
+    public Result<OrderInfo> do_spike(SpikeUser spikeUser, @RequestParam("goodsId") long goodsId) {
+        /*if (spikeUser==null) { //没有登录
+            拦截器中处理
             return Result.error(CodeMsg.LOGIN_NONE);
-        }
+        }*/
         //检查库存
         GoodsVo goodsVo= goodsService.getGoodsVoByGoodsId(goodsId);
 

@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <title>注册</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -79,7 +79,7 @@
         //拿到表单的明文密码
         var inputPass = $("#password").val();
         //盐
-        var salt = g_passsword_salt;
+        var salt = g_password_salt;
         //拼接
         var str = "" + salt.charAt(0) + salt.charAt(2) + inputPass + salt.charAt(5) + salt.charAt(4);
         //得到md5+盐的密码
@@ -88,17 +88,18 @@
         $.ajax({
             url: "/register/do_register",
             type: "POST",
-            data: {
+            contentType: "application/json",
+            data: JSON.stringify({
                 mobile: $("#mobile").val(),
                 password: password,
                 nickname:$("#nickname").val()
-            },
+            }),
             success: function (data) {
                 layer.closeAll();
                 console.log(data);
                 if (data.code == 1) {
                     layer.msg("注册成功");
-                    window.location.href="/login/to_login";
+                    window.location.href="/";
                 } else {
                     layer.msg(data.msg);
                 }

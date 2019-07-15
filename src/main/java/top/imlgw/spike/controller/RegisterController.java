@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import top.imlgw.spike.entity.SpikeUser;
@@ -29,14 +30,10 @@ public class RegisterController {
     @Autowired
     private SpikeUserService spikeUserService;
 
-    @RequestMapping("/to_register")
-    public String to_register(){
-        return "register";
-    }
 
     @RequestMapping("/do_register")
     @ResponseBody
-    public Result<CodeMsg> doRegister(@Validated  RegisterVo vo){
+    public Result<CodeMsg> doRegister(@Validated @RequestBody RegisterVo vo){
         logger.info(vo.toString());
         //注册
         spikeUserService.register(vo);

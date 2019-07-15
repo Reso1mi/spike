@@ -5,7 +5,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import top.imlgw.spike.entity.SpikeUser;
 import top.imlgw.spike.result.CodeMsg;
@@ -29,14 +31,9 @@ public class LoginController {
     @Autowired
     private SpikeUserService spikeUserService;
 
-    @RequestMapping("/to_login")
-    public String login(){
-        return "login";
-    }
-
-    @RequestMapping("/do_login")
+    @RequestMapping(value = "/do_login",method = RequestMethod.POST)
     @ResponseBody
-    public Result<Boolean> doLogin(HttpServletResponse response, @Validated LoginVo vo){
+    public Result<Boolean> doLogin(HttpServletResponse response,@Validated @RequestBody LoginVo vo){
         //表单校验 ---采用JSR校验
         logger.info(vo.toString());
         //改进，采用异常来处理，代码更加简洁

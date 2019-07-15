@@ -9,7 +9,7 @@ import top.imlgw.spike.entity.SpikeUser;
 public class GoodsDetailVo {
     private SpikeUser user;
     private GoodsVo goods;
-    private int remainSeconds = 0;
+    private int remainSeconds;
 
     public GoodsDetailVo(SpikeUser user, GoodsVo goods, int remainSeconds) {
         this.user = user;

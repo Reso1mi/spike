@@ -28,8 +28,10 @@ public class WebConfig implements WebMvcConfigurer{
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         //这里如果是用的模板引擎，就只能是模板引擎template里面的文件
-        registry.addViewController("/").setViewName("login.html");
-        registry.addViewController("/no_login").setViewName("login.html");
+        //这里后面默认指的是static里面的文件，后缀为html
+        registry.addViewController("/").setViewName("login");
+        registry.addViewController("/goodslist").setViewName("goods_list");
+        registry.addViewController("/register").setViewName("register");
     }
 
     @Override
