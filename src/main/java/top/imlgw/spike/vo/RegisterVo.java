@@ -29,6 +29,9 @@ public class RegisterVo {
         this.nickname = nickname;
     }
 
+    public RegisterVo() {
+    }
+
     public String getMobile() {
         return mobile;
     }

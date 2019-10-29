@@ -17,6 +17,9 @@ public class GoodsDetailVo {
         this.remainSeconds = remainSeconds;
     }
 
+    public GoodsDetailVo() {
+    }
+
     public SpikeUser getUser() {
         return user;
     }

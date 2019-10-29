@@ -41,6 +41,9 @@ public class LoginVo {
         this.password = password;
     }
 
+    public LoginVo() {
+    }
+
     public interface Test1{}
 
     public interface Test2{}

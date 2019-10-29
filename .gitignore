@@ -4,7 +4,6 @@ target
 *.springBeans
 *.settings
 *.idea
-*.settings
 *.iml
 *.bak
 *-*-*.iml

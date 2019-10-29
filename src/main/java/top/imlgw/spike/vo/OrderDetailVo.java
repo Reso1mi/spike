@@ -15,6 +15,9 @@ public class OrderDetailVo {
         this.goodsVo = goodsVo;
     }
 
+    public OrderDetailVo() {
+    }
+
     public OrderInfo getOrderInfo() {
         return orderInfo;
     }

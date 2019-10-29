@@ -127,6 +127,4 @@ public class SpikeUserService {
         }
         throw new GlobalException(CodeMsg.SERVER_ERROR);
     }
-
-
 }

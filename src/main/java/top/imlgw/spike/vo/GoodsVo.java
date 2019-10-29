@@ -14,6 +14,9 @@ public class GoodsVo  extends Goods {
     private Date startDate;
     private Date endDate;
 
+    public GoodsVo() {
+    }
+
     public Double getSpikePrice() {
         return spikePrice;
     }
