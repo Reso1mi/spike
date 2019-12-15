@@ -57,7 +57,7 @@ public class RedisService {
      * @param <T>
      * @return 是否存在
      */
-    public <T> boolean exist(KeyPrefix prefix, String key) {
+    public <T> boolean exists(KeyPrefix prefix, String key) {
         Jedis jedis = null;
         try {
             jedis = jedisPool.getResource();
@@ -111,7 +111,7 @@ public class RedisService {
     }
 
 
-    private <T> String beanToString(T value) {
+    public  static  <T> String beanToString(T value) {
         if (value == null) {
             return null;
         }
@@ -128,7 +128,7 @@ public class RedisService {
     }
 
 
-    private <T> T stringToBean(String value, Class clz) {
+    public static  <T> T stringToBean(String value, Class clz) {
         if (value == null || value.length() <= 0 || clz == null) {
             return null;
         }

@@ -83,7 +83,7 @@
             },
             success: function (res) {
                 if (res.code == 0) {
-                    window.location.href = "/order_detail.html?orderId=" + res.data.id;
+                    getSecKillResult($("#goodsId").val());
                 } else {
                     layer.msg(res.msg);
                 }
@@ -95,6 +95,44 @@
 
     }
 
+
+    function getSecKillResult(goodsId) {
+        //showLoading();
+        $.ajax({
+            url:"/spike/result",
+            type:"get",
+            data:{
+                goodsId:$("#goodsId").val()
+            },
+            success:function(data){
+                //请求成功
+                if(data.code == 0){
+                    var result = data.data;
+                    if(result < 0){//秒杀失败
+                        layer.msg("秒杀失败");
+                    }else if(result == 0){//排队中,继续轮询
+                        setTimeout(function () {
+                            getSecKillResult(goodsId);
+                        },1000)
+                    }else{//秒杀成功
+                        layer.confirm("恭喜，秒杀成功！查看订单?",{bth:["确定","取消"]},
+                            function () {
+                                window.location.href="/order_detail.html?orderId="+result;
+                            },
+                            function () {
+                                layer.close();
+                            }
+                        )
+                    }
+                }else{
+                    layer.msg(data.msg);
+                }
+            },
+            error:function(){
+                layer.msg("客户端请求有误--/spike/result");
+            }
+        });
+    }
 
     $(function () {
         //countDown();

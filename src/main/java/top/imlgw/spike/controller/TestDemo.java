@@ -10,14 +10,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import top.imlgw.spike.dao.UserDao;
 import top.imlgw.spike.entity.SpikeUser;
 import top.imlgw.spike.entity.User;
+import top.imlgw.spike.rabbitmq.MQSender;
 import top.imlgw.spike.redis.RedisService;
 import top.imlgw.spike.result.Result;
 import top.imlgw.spike.vo.LoginVo;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
-
-
 /**
  * @author imlgw.top
  * @date 2019/5/11 14:18
@@ -30,6 +26,40 @@ public class TestDemo {
 
     @Autowired
     private RedisService redisService;
+
+    @Autowired
+    private MQSender mqSender;
+    /*
+    * MQ测试
+    * */
+/*    @RequestMapping("/mq")
+    @ResponseBody
+    public Result<String> mq(){
+        mqSender.send("Hello, mq direct! ! !");
+        return  Result.success(CodeMsg.SUCCESS);
+    }
+
+    @RequestMapping("/mqtopic")
+    @ResponseBody
+    public Result<String> mqtopic(){
+        mqSender.sendTopic("Hello, mq Topic ! ! !");
+        return  Result.success(CodeMsg.SUCCESS);
+    }
+
+    @RequestMapping("/mqfanout")
+    @ResponseBody
+    public Result<String> mqfanout(){
+        mqSender.sendFanout("Hello, mq fanout ! ! !");
+        return  Result.success(CodeMsg.SUCCESS);
+    }
+
+
+    @RequestMapping("/mqheader")
+    @ResponseBody
+    public Result<String> mqheader(){
+        mqSender.sendHeader("Hello, mq header ! ! !");
+        return  Result.success(CodeMsg.SUCCESS);
+    }*/
 
     /*
     *框架测试

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import top.imlgw.spike.entity.SpikeUser;
 import top.imlgw.spike.redis.GoodsKey;
 import top.imlgw.spike.redis.RedisService;
+import top.imlgw.spike.result.CodeMsg;
 import top.imlgw.spike.result.Result;
 import top.imlgw.spike.service.GoodsService;
 import top.imlgw.spike.vo.GoodsDetailVo;
@@ -37,7 +38,6 @@ public class GoodsController {
     /**
      * 未做缓存前：5000*10并发，QPS大概 1000
      * 页面缓存后：5000*10的并发下 QPS提高到了3000左右
-     * 前后端完全分离后：
      * @return
      */
     @RequestMapping(value = "/get_list")
@@ -49,7 +49,6 @@ public class GoodsController {
             return Result.success(redisVoList);
         }
         List<GoodsVo> voList = goodsService.goodsVoList();
-        //上下循序不能交换
         redisService.set(GoodsKey.glsPrefix, GOODS_LIST_KEY, voList);
         logger.info("从mysql中获取商品列表的信息");
         System.out.println(voList);

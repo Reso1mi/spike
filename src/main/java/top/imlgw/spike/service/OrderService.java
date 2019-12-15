@@ -6,6 +6,9 @@ import org.springframework.transaction.annotation.Transactional;
 import top.imlgw.spike.dao.OrderDao;
 import top.imlgw.spike.entity.OrderInfo;
 import top.imlgw.spike.entity.SpikeOrder;
+import top.imlgw.spike.redis.GoodsKey;
+import top.imlgw.spike.redis.OrderKey;
+import top.imlgw.spike.redis.RedisService;
 import top.imlgw.spike.vo.GoodsVo;
 
 import java.util.Date;
@@ -16,8 +19,12 @@ import java.util.Date;
  */
 @Service
 public class OrderService {
+
     @Autowired
     private OrderDao orderDao;
+
+    @Autowired
+    private RedisService redisService;
 
     /**
      * @param orderId
@@ -32,8 +39,9 @@ public class OrderService {
      * @param goodsId
      * @return 判断是否重复秒杀
      */
-    public SpikeOrder getOrderByUserIdAndGoodsId(long spikeUserId, long goodsId){
-        return orderDao.getOrderByUserIdAndGoodsId(spikeUserId,goodsId);
+    public SpikeOrder getOrderByUserIdAndGoodsId(long userId, long goodsId){
+        //return orderDao.getOrderByUserIdAndGoodsId(spikeUserId,goodsId); 从缓存中取得
+        return redisService.get(OrderKey.getSpikeOrderByUidGid,""+userId+"_"+goodsId,SpikeOrder.class);
     }
 
     /**
@@ -58,6 +66,8 @@ public class OrderService {
         spikeOrder.setOrderId(orderInfo.getId());
         spikeOrder.setUserId(userId);
         spikeOrder.setGoodsId(goodsVo.getId());
+        //key: prefix+userId_goodsId  value: spikeOrder
+        redisService.set(OrderKey.getSpikeOrderByUidGid,""+userId+"_"+goodsVo.getId(),spikeOrder);
         orderDao.insertToSpikeOrder(spikeOrder);
         return orderInfo;
     }
