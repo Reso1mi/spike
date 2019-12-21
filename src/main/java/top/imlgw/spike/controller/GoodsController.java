@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import top.imlgw.spike.entity.SpikeUser;
 import top.imlgw.spike.redis.GoodsKey;
 import top.imlgw.spike.redis.RedisService;
-import top.imlgw.spike.result.CodeMsg;
 import top.imlgw.spike.result.Result;
 import top.imlgw.spike.service.GoodsService;
 import top.imlgw.spike.vo.GoodsDetailVo;

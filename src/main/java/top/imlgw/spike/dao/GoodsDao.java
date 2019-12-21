@@ -22,6 +22,6 @@ public interface GoodsDao {
     @Select("select g.*,sg.stock_count, sg.start_date, sg.end_date,sg.spike_price from spike_goods sg inner join goods g on sg.goods_id = g.id and sg.goods_id=#{id}")
     GoodsVo getGoodsVoById(long id);
 
-    @Insert("update spike_goods set stock_count = stock_count-1 where goods_id=#{goodsId}")
+    @Insert("update spike_goods set stock_count = stock_count-1 where goods_id=#{goodsId} and stock_count > 0")
     int reduceStock(long goodsId);
 }

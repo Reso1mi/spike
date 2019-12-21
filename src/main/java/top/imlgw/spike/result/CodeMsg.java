@@ -30,6 +30,10 @@ public class CodeMsg {
     public static final CodeMsg LOGIN_NONE=new CodeMsg(500312,"尚未登陆！！！");
     //订单异常
     public static final CodeMsg ORDRER_NOT_EXIST=new CodeMsg(500400,"订单不存在！！！");
+    public static final CodeMsg VERIFY_CODE_ERROR = new CodeMsg(50054,"请输入正确的验证码");
+
+    public static final CodeMsg REQUEST_ILLEGAL = new CodeMsg(50055,"请求非法");
+    public static final CodeMsg ACCESS_LIMIT = new CodeMsg(50055,"请求太频繁");
 
     private CodeMsg(int code, String msg) {
         this.code = code;

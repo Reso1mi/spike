@@ -35,9 +35,8 @@ public class OrderService {
     }
 
     /**
-     * @param spikeUserId
      * @param goodsId
-     * @return 判断是否重复秒杀
+     * @return 从Redis中断是否重复秒杀
      */
     public SpikeOrder getOrderByUserIdAndGoodsId(long userId, long goodsId){
         //return orderDao.getOrderByUserIdAndGoodsId(spikeUserId,goodsId); 从缓存中取得
@@ -67,6 +66,7 @@ public class OrderService {
         spikeOrder.setUserId(userId);
         spikeOrder.setGoodsId(goodsVo.getId());
         //key: prefix+userId_goodsId  value: spikeOrder
+        //将订单信息存到Redis中
         redisService.set(OrderKey.getSpikeOrderByUidGid,""+userId+"_"+goodsVo.getId(),spikeOrder);
         orderDao.insertToSpikeOrder(spikeOrder);
         return orderInfo;

@@ -6,6 +6,8 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import top.imlgw.spike.access.AccessInterceptor;
+import top.imlgw.spike.access.AccessLimit;
 import top.imlgw.spike.intercept.LoginIntercept;
 
 import java.util.List;
@@ -18,6 +20,9 @@ public class WebConfig implements WebMvcConfigurer{
 
     @Autowired
     LoginIntercept loginIntercept;
+
+    @Autowired
+    AccessInterceptor accessInterceptor;
 
 
     @Override
@@ -37,7 +42,8 @@ public class WebConfig implements WebMvcConfigurer{
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //这里不排除login也可以，但是效率可能会低一些
-        registry.addInterceptor(loginIntercept).addPathPatterns("/**").excludePathPatterns("/login/*");
+        registry.addInterceptor(loginIntercept);
+        registry.addInterceptor(accessInterceptor);
     }
 
 }
