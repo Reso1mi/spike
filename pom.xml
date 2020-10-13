@@ -91,7 +91,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>4.13.1</version>
             <scope>test</scope>
         </dependency>
         <!--打war包, 把内置的tomcat变为编译时依赖,打包的时候不会打包进去,不然两个tomcat会有问题-->
